@@ -2,19 +2,15 @@
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 function getAllDirectors(moviesArray) {
-    const directors = moviesArray.map(function (movie) {
-        return movie.director
-    })
+    const directors = moviesArray.map(movie => movie.director)
     return directors
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
-    const spielbergDramas = moviesArray.filter(function (movie) {
-        return movie.director === "Steven Spielberg" && movie.genre.includes("Drama")
-    })
+    const spielbergDrama = moviesArray.filter(movie => movie.director === "Steven Spielberg" && movie.genre.includes("Drama"))
 
-    return spielbergDramas.length
+    return spielbergDrama.length
 }
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
@@ -85,6 +81,30 @@ function orderAlphabetically(moviesArray) {
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {
 
+    return moviesArray.map(movie => {
+
+        const parts = movie.duration.split(' ')
+        let totalMinutes = 0
+
+
+        parts.forEach(part => {
+            if (part.includes('h')) {
+
+                const hours = parseInt(part.replace('h', ''))
+                totalMinutes += hours * 60
+
+            } else if (part.includes('min')) {
+
+                const minutes = parseInt(part.replace('min', ''))
+                totalMinutes += minutes
+            }
+        })
+
+
+        return {
+            duration: totalMinutes
+        }
+    })
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
